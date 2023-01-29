@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.hibernate:hibernate-core:5.3.10.Final'
+    runtimeOnly 'com.h2database:h2:2.0.206'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
