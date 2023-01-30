@@ -16,21 +16,19 @@ public class JpaMain {
 
 		try {
 			// 회원 등록
-			/*Member member = new Member();
+			Member member = new Member();
 			member.setId(1L);
 			member.setName("HelloA");
-			member.setId(2L);
-			member.setName("HelloB");
-			em.persist(member);*/
+			Member member2 = new Member();
+			member2.setId(2L);
+			member2.setName("HelloB");
+			em.persist(member);
+			em.persist(member2);
 
 			// 회원 조회 및 수정
-			/*Member findMember = em.find(Member.class, 1L);
+			Member findMember = em.find(Member.class, 1L);
 			// System.out.println(findMember);
-			findMember.setName("HelloJPA");*/
-
-			// 회원 삭제
-			/*Member findMember = em.find(Member.class, 1L);
-			em.remove(findMember);*/
+			findMember.setName("HelloJPA");
 
 			// JPQL
 			List<Member> result = em.createQuery("select m from Member m", Member.class)
@@ -38,6 +36,10 @@ public class JpaMain {
 				.setMaxResults(10)
 				.getResultList();
 			System.out.println(result);
+
+			// 회원 삭제
+			Member findMember2 = em.find(Member.class, 1L);
+			em.remove(findMember2);
 
 			tx.commit();
 		} catch (Exception e) {
