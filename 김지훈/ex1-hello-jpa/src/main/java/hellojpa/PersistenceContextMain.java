@@ -15,7 +15,7 @@ public class PersistenceContextMain {
 
 		try {
 			// 엔티티를 생성한 상태 (비영속)
-			Member member = new Member();
+			/*Member member = new Member();
 			member.setId(101L);
 			member.setName("HelloJPA");
 
@@ -25,7 +25,12 @@ public class PersistenceContextMain {
 			System.out.println("=== AFTER ===");
 
 			Member findMember = em.find(Member.class, 101L); // 1차 캐시에서 조회.
-			System.out.println(findMember);
+			System.out.println(findMember);*/
+
+			Member findMember1 = em.find(Member.class, 101L); // 데이터베이스에 조회 -> 1차 캐시에 저장
+			Member findMember2 = em.find(Member.class, 101L); // 1차 캐시에서 조회
+
+			System.out.println(findMember1 == findMember2); // true, 영속 엔티티의 동일성 보장.
 
 			tx.commit();
 		} catch (Exception e) {
