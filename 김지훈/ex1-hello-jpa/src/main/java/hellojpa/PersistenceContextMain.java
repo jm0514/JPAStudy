@@ -27,10 +27,19 @@ public class PersistenceContextMain {
 			Member findMember = em.find(Member.class, 101L); // 1차 캐시에서 조회.
 			System.out.println(findMember);*/
 
-			Member findMember1 = em.find(Member.class, 101L); // 데이터베이스에 조회 -> 1차 캐시에 저장
+			/*Member findMember1 = em.find(Member.class, 101L); // 데이터베이스에 조회 -> 1차 캐시에 저장
 			Member findMember2 = em.find(Member.class, 101L); // 1차 캐시에서 조회
 
-			System.out.println(findMember1 == findMember2); // true, 영속 엔티티의 동일성 보장.
+			System.out.println(findMember1 == findMember2); // true, 영속 엔티티의 동일성 보장.*/
+
+			// 쓰기 지연
+			Member member1 = new Member(150L, "A");
+			Member member2 = new Member(160L, "B");
+			em.persist(member1);
+			em.persist(member2);
+			// 여기까지 INSERT SQL을 데이터베이스에 보내지 않는다.
+			System.out.println("==========================");
+			// 커밋하는 순간 데이터베이스에 INSERT SQL을 보낸다.
 
 			tx.commit();
 		} catch (Exception e) {
