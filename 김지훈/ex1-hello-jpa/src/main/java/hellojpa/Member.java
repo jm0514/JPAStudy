@@ -10,8 +10,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,11 +27,15 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "MEMBER", uniqueConstraints = {@UniqueConstraint(
+	name = "NAME_AGE_UNIQUE",
+	columnNames = {"NAME", "AGE"}
+)})
 public class Member {
 	@Id
 	private Long id;
 
-	@Column(name = "name")
+	@Column(name = "name", nullable = false, length = 10)
 	private String username;
 
 	private Integer age;
