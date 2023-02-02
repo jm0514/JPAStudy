@@ -18,17 +18,17 @@ public class JpaMain {
 			// 회원 등록
 			Member member = new Member();
 			member.setId(1L);
-			member.setName("HelloA");
+			member.setUsername("HelloA");
 			Member member2 = new Member();
 			member2.setId(2L);
-			member2.setName("HelloB");
+			member2.setUsername("HelloB");
 			em.persist(member);
 			em.persist(member2);
 
 			// 회원 조회 및 수정
 			Member findMember = em.find(Member.class, 1L);
 			// System.out.println(findMember);
-			findMember.setName("HelloJPA");
+			findMember.setUsername("HelloJPA");
 
 			// JPQL
 			List<Member> result = em.createQuery("select m from Member m", Member.class)

@@ -14,7 +14,7 @@ public class DetachMain {
 
 		try {
 			Member member = em.find(Member.class, 150L);
-			member.setName("AAAAA");
+			member.setUsername("AAAAA");
 
 			// em.detach(member);
 			em.clear();

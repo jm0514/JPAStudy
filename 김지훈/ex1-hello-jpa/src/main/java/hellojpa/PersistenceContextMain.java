@@ -43,7 +43,7 @@ public class PersistenceContextMain {
 
 			// 변경 감지
 			Member member = em.find(Member.class, 150L);
-			member.setName("ZZZZZ");
+			member.setUsername("ZZZZZ");
 			System.out.println("==========================");
 
 			tx.commit();

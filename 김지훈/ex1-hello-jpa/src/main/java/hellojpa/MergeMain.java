@@ -11,7 +11,7 @@ public class MergeMain {
 	public static void main(String[] args) {
 		Member member = createMember(1246L, "회원1");
 
-		member.setName("회원명변경"); // 준영속 상태에서 변경
+		member.setUsername("회원명변경"); // 준영속 상태에서 변경
 
 		mergeMember(member);
 	}
