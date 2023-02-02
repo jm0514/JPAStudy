@@ -10,24 +10,26 @@
 * JPQL 쿼리 실행 => 자동으로 플러쉬 호출
 
 
-        /flush
-        Member member1 = new Member(200L, "asd");
-        em.persist(member1);
+/flush
+```java
+Member member1 = new Member(200L, "asd");
+em.persist(member1);
 
-        em.flush(); -> 이 시점에 ㅋㅓ밋전에 변경내용을 감지해서 db에 반영함. 이렇게 직접하는경우는 거의 없고 테스트 할 때 씀. 보통은 그냥 em.persist만 써도 알아서 변경감지 해주니 걱정ㄴ
-        //flush가 호출되면 이 시점에서 쓰기지연 SQL저장소에서 저장된 SQL들이 바로 DB로 쿼리문을 날림.        
-        -------------
-        tx.commit()
+em.flush(); -> //이 시점에 ㅋㅓ밋전에 변경내용을 감지해서 db에 반영함. 이렇게 직접하는경우는 거의 없고 테스트 할 때 씀. 보통은 그냥 em.persist만 써도 알아서 변경감지 해주니 걱정ㄴ
+//flush가 호출되면 이 시점에서 쓰기지연 SQL저장소에서 저장된 SQL들이 바로 DB로 쿼리문을 날림.        
+-------------
+tx.commit()
+```
 * DB에 반영은 되지만 1차캐시가 지워지는건 아님.
 
 
 *  중간에 JPQL 실행
-    
-        em.persist(memberA);
-        em.persist(memberB);
-        em.persist(memberC);
-      
-        query = em.createQuery("select m from Memberm", Member.class);
-        List<Member> members = query.getResultList();
+```java    
+em.persist(memberA);
+em.persist(memberB);
+em.persist(memberC);
 
+query = em.createQuery("select m from Memberm", Member.class);
+List<Member> members = query.getResultList();
+```
   * 이것 처럼 DB에 저장도 안된걸 찾아오라는 JPQL이 날아오게 되면 사고가 날 수 있기 때문에 JPA에서는 자동으로 flush를 날려 DB에 저장 후 select쿼리로 찾아옴.
