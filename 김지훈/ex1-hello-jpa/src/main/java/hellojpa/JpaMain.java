@@ -16,7 +16,7 @@ public class JpaMain {
 
 		try {
 			// 회원 등록
-			Member member = new Member();
+			/*Member member = new Member();
 			member.setId(1L);
 			member.setUsername("HelloA");
 			Member member2 = new Member();
@@ -39,7 +39,83 @@ public class JpaMain {
 
 			// 회원 삭제
 			Member findMember2 = em.find(Member.class, 1L);
-			em.remove(findMember2);
+			em.remove(findMember2);*/
+
+
+
+			// 엔티티를 생성한 상태 (비영속)
+			/*Member member = new Member();
+			member.setId(101L);
+			member.setName("HelloJPA");
+
+			// 엔티티를 영속 (DB에 저장되지 않는다. 쿼리가 여기서 나오지 않는다.)
+			System.out.println("=== BEFORE ===");
+			em.persist(member);
+			System.out.println("=== AFTER ===");
+
+			Member findMember = em.find(Member.class, 101L); // 1차 캐시에서 조회.
+			System.out.println(findMember);
+
+			Member findMember1 = em.find(Member.class, 101L); // 데이터베이스에 조회 -> 1차 캐시에 저장
+			Member findMember2 = em.find(Member.class, 101L); // 1차 캐시에서 조회
+
+			System.out.println(findMember1 == findMember2); // true, 영속 엔티티의 동일성 보장.
+
+			// 쓰기 지연
+			Member member1 = new Member(150L, "A");
+			Member member2 = new Member(160L, "B");
+			em.persist(member1);
+			em.persist(member2);
+			// 여기까지 INSERT SQL을 데이터베이스에 보내지 않는다.
+			System.out.println("==========================");
+			// 커밋하는 순간 데이터베이스에 INSERT SQL을 보낸다.
+
+			// 변경 감지
+			Member member = em.find(Member.class, 150L);
+			member.setUsername("ZZZZZ");
+			System.out.println("==========================");*/
+
+			// 플러시
+			/*
+			Member member = new Member(200L, "member200");
+			em.persist(member);
+			em.flush();
+
+			System.out.println("======================");
+			 */
+
+			// detach
+			/*
+			Member member = em.find(Member.class, 150L);
+			member.setUsername("AAAAA");
+
+			// em.detach(member);
+			em.clear();
+			Member member2 = em.find(Member.class, 150L);
+			 */
+
+			// MappingMain
+			/*Member member = new Member();
+			member.setId(1L);
+			member.setUsername("A");
+			member.setRoleType(RoleType.USER);
+			em.persist(member);
+
+			Member member2 = new Member();
+			member2.setId(2L);
+			member2.setUsername("B");
+			member2.setRoleType(RoleType.ADMIN);
+			em.persist(member2);*/
+
+			// 	@Enumerated(EnumType.STRING) String 으로 써야 하는 이유.
+			// Ordinal일 경우 새로 앞에 추가된 GUEST와 USER가 같은 0 값을 갖게 된다.
+			// 그리고 전체적인 순서가 뒤죽박죽되어 데이터가 엉킬 수 있음.
+			/*Member member3 = new Member();
+			member3.setId(3L);
+			member3.setUsername("C");
+			member3.setRoleType(RoleType.GUEST);
+			em.persist(member3);*/
+
 
 			tx.commit();
 		} catch (Exception e) {
