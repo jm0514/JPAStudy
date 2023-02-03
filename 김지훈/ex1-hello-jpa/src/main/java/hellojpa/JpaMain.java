@@ -116,6 +116,36 @@ public class JpaMain {
 			member3.setRoleType(RoleType.GUEST);
 			em.persist(member3);*/
 
+			// 기본 키 매핑 전략
+			// MEMBER 엔티티 변경 (간단히)
+			/*Member member = new Member();
+			member.setUsername("A");
+
+			System.out.println("======================");
+
+			em.persist(member);
+
+			System.out.println(member);
+			System.out.println("======================");*/
+
+			Member member1 = new Member();
+			member1.setUsername("A");
+
+			Member member2 = new Member();
+			member2.setUsername("B");
+
+			Member member3 = new Member();
+			member3.setUsername("C");
+
+			System.out.println("======================");
+			em.persist(member1);
+			em.persist(member2);
+			em.persist(member3);
+
+			System.out.println(member1);
+			System.out.println(member2);
+			System.out.println(member3);
+			System.out.println("======================");
 
 			tx.commit();
 		} catch (Exception e) {
