@@ -17,15 +17,11 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+public class Team {
 	@Id
 	@GeneratedValue
-	@Column(name = "MEMBER_ID")
+	@Column(name = "TEAM_ID")
 	private Long id;
 
-	@Column(name = "USERNAME")
-	private String username;
-
-	@Column(name = "TEAM_ID")
-	private Long teamId;
+	private String name;
 }
