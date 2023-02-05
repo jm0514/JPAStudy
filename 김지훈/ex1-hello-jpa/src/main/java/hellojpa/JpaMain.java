@@ -153,13 +153,18 @@ public class JpaMain {
 
 			Member member = new Member();
 			member.setUsername("member1");
-			member.setTeamId(team.getId());
+			// member.setTeamId(team.getId());
+			// 단방향 연관관계 사용.
+			member.setTeam(team);
 			em.persist(member);
 
-			// 객체를 테이블에 맞추어 데이터 중심 모델링으로 인한 문제점.
 			Member findMember = em.find(Member.class, member.getId());
-			Long findTeamId = findMember.getTeamId();
-			Team findTeam = em.find(Team.class, findTeamId);
+			// 객체를 테이블에 맞추어 데이터 중심 모델링으로 인한 문제점.
+			// Long findTeamId = findMember.getTeamId();
+			// Team findTeam = em.find(Team.class, findTeamId);
+
+			// 단방향 연관관계 사용 조회
+			Team findTeam = findMember.getTeam();
 			System.out.println(findTeam);
 			tx.commit();
 		} catch (Exception e) {
