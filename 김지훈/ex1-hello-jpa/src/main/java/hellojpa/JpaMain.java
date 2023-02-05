@@ -128,7 +128,7 @@ public class JpaMain {
 			System.out.println(member);
 			System.out.println("======================");*/
 
-			Member member1 = new Member();
+			/*Member member1 = new Member();
 			member1.setUsername("A");
 
 			Member member2 = new Member();
@@ -145,8 +145,22 @@ public class JpaMain {
 			System.out.println(member1);
 			System.out.println(member2);
 			System.out.println(member3);
-			System.out.println("======================");
+			System.out.println("======================");*/
 
+			Team team = new Team();
+			team.setName("TeamA");
+			em.persist(team);
+
+			Member member = new Member();
+			member.setUsername("member1");
+			member.setTeamId(team.getId());
+			em.persist(member);
+
+			// 객체를 테이블에 맞추어 데이터 중심 모델링으로 인한 문제점.
+			Member findMember = em.find(Member.class, member.getId());
+			Long findTeamId = findMember.getTeamId();
+			Team findTeam = em.find(Team.class, findTeamId);
+			System.out.println(findTeam);
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
