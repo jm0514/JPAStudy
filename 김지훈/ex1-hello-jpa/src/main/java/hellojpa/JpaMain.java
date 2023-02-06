@@ -176,17 +176,33 @@ public class JpaMain {
 
 			// 양방향 매핑시 가장 많이 하는 실수.
 			// 연관관계의 주인에 값을 입력하지 않음.
-			Member member = new Member();
+			/*Member member = new Member();
 			member.setUsername("member1");
 			em.persist(member);
 
 			Team team = new Team();
 			team.setName("TeamA");
 			team.getMembers().add(member);
+			em.persist(team);*/
+			Team team = new Team();
+			team.setName("TeamA");
 			em.persist(team);
+
+			Member member = new Member();
+			member.setUsername("member1");
+			member.setTeam(team);
+			em.persist(member);
+
+			team.getMembers().add(member);
 
 			em.flush();
 			em.clear();
+
+			Team findTeam = em.find(Team.class, team.getId());
+			List<Member> members = findTeam.getMembers();
+			for (Member m : members) {
+				System.out.println("m = " + m.getUsername());
+			}
 
 			tx.commit();
 		} catch (Exception e) {
