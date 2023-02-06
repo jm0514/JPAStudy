@@ -158,14 +158,21 @@ public class JpaMain {
 			member.setTeam(team);
 			em.persist(member);
 
+			em.flush();
+			em.clear();
+
 			Member findMember = em.find(Member.class, member.getId());
 			// 객체를 테이블에 맞추어 데이터 중심 모델링으로 인한 문제점.
 			// Long findTeamId = findMember.getTeamId();
 			// Team findTeam = em.find(Team.class, findTeamId);
 
 			// 단방향 연관관계 사용 조회
-			Team findTeam = findMember.getTeam();
-			System.out.println(findTeam);
+			// Team findTeam = findMember.getTeam();
+			// System.out.println(findTeam);
+			List<Member> members = findMember.getTeam().getMembers();
+			for (Member m : members) {
+				System.out.println("m = " + m.getUsername());
+			}
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
