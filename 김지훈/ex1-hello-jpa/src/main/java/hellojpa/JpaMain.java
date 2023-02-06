@@ -147,7 +147,7 @@ public class JpaMain {
 			System.out.println(member3);
 			System.out.println("======================");*/
 
-			Team team = new Team();
+			/*Team team = new Team();
 			team.setName("TeamA");
 			em.persist(team);
 
@@ -172,7 +172,22 @@ public class JpaMain {
 			List<Member> members = findMember.getTeam().getMembers();
 			for (Member m : members) {
 				System.out.println("m = " + m.getUsername());
-			}
+			}*/
+
+			// 양방향 매핑시 가장 많이 하는 실수.
+			// 연관관계의 주인에 값을 입력하지 않음.
+			Member member = new Member();
+			member.setUsername("member1");
+			em.persist(member);
+
+			Team team = new Team();
+			team.setName("TeamA");
+			team.getMembers().add(member);
+			em.persist(team);
+
+			em.flush();
+			em.clear();
+
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
