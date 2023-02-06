@@ -41,6 +41,15 @@ public class Order {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus status;
 
+	public void setMember(Member member) {
+		// 기존 관계 제거
+		if (this.member != null) {
+			this.member.getOrders().remove(this);
+		}
+		this.member = member;
+		member.getOrders().remove(this);
+	}
+
 	public void addOrderItem(OrderItem orderItem) {
 		orderItems.add(orderItem);
 		orderItem.setOrder(this);
