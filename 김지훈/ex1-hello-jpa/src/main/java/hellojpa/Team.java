@@ -34,6 +34,8 @@ public class Team {
 
 	public void addMember(Member member) {
 		member.setTeam(this);
-		members.add(member);
+		if (member.getTeam() != this) {
+			members.add(member);
+		}
 	}
 }
