@@ -34,4 +34,7 @@ public class Team {
 	@JoinColumn(name = "TEAM_ID")
 	private List<Member> members = new ArrayList<>();
 
+	public Team(String name) {
+		this.name = name;
+	}
 }
