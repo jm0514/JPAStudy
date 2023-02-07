@@ -30,8 +30,7 @@ public class Member {
 	@Column(name = "USERNAME")
 	private String username;
 
-	@OneToOne
-	@JoinColumn(name = "LOCKER_ID")
+	@OneToOne(mappedBy = "member")
 	private Locker locker;
 
 	public Member(String username) {
