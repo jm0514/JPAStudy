@@ -38,9 +38,8 @@ public class Member {
 	@OneToOne(mappedBy = "member")
 	private Locker locker;
 
-	@ManyToMany
-	@JoinTable(name = "MEMBER_PRODUCT")
-	private List<Product> products = new ArrayList<>();
+	@OneToMany(mappedBy = "member")
+	private List<MemberProduct> memberProducts = new ArrayList<>();
 
 	public Member(String username) {
 		this.username = username;
