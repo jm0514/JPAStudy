@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
@@ -38,8 +36,11 @@ public class Member {
 	@OneToOne(mappedBy = "member")
 	private Locker locker;
 
-	@OneToMany(mappedBy = "member")
-	private List<MemberProduct> memberProducts = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name = "MEMBER_PRODUCT",
+		joinColumns = @JoinColumn(name = "MEMBER_ID"),
+		inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
+	private List<Product> products = new ArrayList<>();
 
 	public Member(String username) {
 		this.username = username;
