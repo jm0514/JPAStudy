@@ -42,6 +42,11 @@ public class Member {
 		inverseJoinColumns = @JoinColumn(name = "PRODUCT_ID"))
 	private List<Product> products = new ArrayList<>();
 
+	public void addProduct(Product product) {
+		products.add(product);
+		product.getMembers().add(this);
+	}
+
 	public Member(String username) {
 		this.username = username;
 	}

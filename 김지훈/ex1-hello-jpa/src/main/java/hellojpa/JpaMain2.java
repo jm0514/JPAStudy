@@ -28,13 +28,12 @@ public class JpaMain2 {
 			em.persist(team1);
 			// team을 persist시 member 업데이트 쿼리가 나옴.*/
 
-			Product productA = new Product();
-			// productA.setId(1L);
+			// 다대다 단방향
+			/*Product productA = new Product();
 			productA.setName("상품A");
 			em.persist(productA);
 
 			Member member1 = new Member();
-			// member1.setId(1L);
 			member1.setUsername("회원1");
 			member1.getProducts().add(productA);
 			em.persist(member1);
@@ -45,6 +44,25 @@ public class JpaMain2 {
 			List<Product> products = member.getProducts();
 			for (Product product : products) {
 				System.out.println("product.name=" + product.getName());
+			}*/
+
+			// 다대다 양방향
+			Product productA = new Product();
+			productA.setName("상품A");
+			em.persist(productA);
+
+			Member member1 = new Member();
+			member1.setUsername("회원1");
+			member1.addProduct(productA);
+			em.persist(member1);
+
+			em.flush();
+			em.clear();
+
+			Product product = em.find(Product.class, 1L);
+			List<Member> members = product.getMembers();
+			for (Member member : members) {
+				System.out.println("member = " + member.getUsername());
 			}
 			tx.commit();
 		} catch (Exception e) {
