@@ -24,8 +24,13 @@ public class Main {
 			em.flush();
 			em.clear();
 
-			Movie findMovie = em.find(Movie.class, movie.getId());
-			System.out.println(findMovie);
+			// Movie findMovie = em.find(Movie.class, movie.getId());
+			// System.out.println(findMovie);
+
+			// 부모 타입으로 데이터 조회 시 union all로 item 테이블을 모두 탐색
+			// 복잡한 쿼리 발생, 비효율
+			Item item = em.find(Item.class, movie.getId());
+			System.out.println("item = " + item);
 
 			tx.commit();
 		} catch (Exception e) {
