@@ -35,7 +35,7 @@ public class Member {
 	private Locker locker;
 
 	@OneToMany(mappedBy = "member")
-	private List<MemberProduct> memberProducts = new ArrayList<>();
+	private List<Order> orders = new ArrayList<>();
 
 	public Member(String username) {
 		this.username = username;

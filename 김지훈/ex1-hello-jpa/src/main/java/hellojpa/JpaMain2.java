@@ -67,7 +67,7 @@ public class JpaMain2 {
 
 			// 연결 엔티티 사용
 			// 회원 저장
-			Member member1 = new Member();
+			/*Member member1 = new Member();
 			member1.setUsername("회원1");
 			em.persist(member1);
 
@@ -98,7 +98,39 @@ public class JpaMain2 {
 			Product product = findMemberProduct.getProduct();
 			System.out.println("member.getUsername() = " + member.getUsername());
 			System.out.println("product.getName() = " + product.getName());
-			System.out.println("memberProduct.getCount() = " + memberProduct.getCount());
+			System.out.println("memberProduct.getCount() = " + memberProduct.getCount());*/
+
+			// 새로운 기본 키 사용
+			// 회원 저장
+			Member member1 = new Member();
+			member1.setUsername("회원1");
+			em.persist(member1);
+
+			// 상품 저장
+			Product productA = new Product();
+			productA.setName("상품1");
+			em.persist(productA);
+
+			// 주문 저장
+			Order order = new Order();
+			order.setMember(member1);
+			order.setProduct(productA);
+			order.setOrderAmount(2);
+			em.persist(order);
+
+			em.flush();
+			em.clear();
+
+			// 조회 코드
+			Long orderId = order.getId();
+			Order findOrder = em.find(Order.class, orderId);
+
+			Member findMember = findOrder.getMember();
+			Product findProduct = findOrder.getProduct();
+
+			System.out.println("findMember.getUsername() = " + findMember.getUsername());
+			System.out.println("findProduct.getName() = " + findProduct.getName());
+			System.out.println("findOrder.getOrderAmount() = " + findOrder.getOrderAmount());
 
 			tx.commit();
 		} catch (Exception e) {
