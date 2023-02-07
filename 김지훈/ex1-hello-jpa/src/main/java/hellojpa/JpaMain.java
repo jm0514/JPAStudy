@@ -184,7 +184,7 @@ public class JpaMain {
 			team.setName("TeamA");
 			team.getMembers().add(member);
 			em.persist(team);*/
-			Team team = new Team();
+			/*Team team = new Team();
 			team.setName("TeamA");
 			em.persist(team);
 
@@ -203,7 +203,17 @@ public class JpaMain {
 			List<Member> members = findTeam.getMembers();
 			for (Member m : members) {
 				System.out.println("m = " + m.getUsername());
-			}
+			}*/
+
+			Member member = new Member();
+			member.setUsername("member1");
+
+			em.persist(member);
+
+			Team team = new Team();
+			team.setName("teamA");
+			team.getMembers().add(member);
+			em.persist(team);
 
 			tx.commit();
 		} catch (Exception e) {
