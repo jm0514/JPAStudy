@@ -47,7 +47,7 @@ public class JpaMain2 {
 			}*/
 
 			// 다대다 양방향
-			Product productA = new Product();
+			/*Product productA = new Product();
 			productA.setName("상품A");
 			em.persist(productA);
 
@@ -63,7 +63,43 @@ public class JpaMain2 {
 			List<Member> members = product.getMembers();
 			for (Member member : members) {
 				System.out.println("member = " + member.getUsername());
-			}
+			}*/
+
+			// 연결 엔티티 사용
+			// 회원 저장
+			Member member1 = new Member();
+			member1.setUsername("회원1");
+			em.persist(member1);
+
+			// 상품 저장
+			Product productA = new Product();
+			productA.setName("상품1");
+			em.persist(productA);
+
+			// 회원 상품 저장
+			MemberProduct memberProduct = new MemberProduct();
+			memberProduct.setMember(member1);
+			memberProduct.setProduct(productA);
+			memberProduct.setCount(1);
+
+			em.persist(memberProduct);
+
+			em.flush();
+			em.clear();
+
+			// 조회 코드
+			// 기본 키 값 생성
+			MemberProductId memberProductId = new MemberProductId();
+			memberProductId.setMember(1L);
+			memberProductId.setProduct(2L);
+
+			MemberProduct findMemberProduct = em.find(MemberProduct.class, memberProductId);
+			Member member = findMemberProduct.getMember();
+			Product product = findMemberProduct.getProduct();
+			System.out.println("member.getUsername() = " + member.getUsername());
+			System.out.println("product.getName() = " + product.getName());
+			System.out.println("memberProduct.getCount() = " + memberProduct.getCount());
+
 			tx.commit();
 		} catch (Exception e) {
 			tx.rollback();
