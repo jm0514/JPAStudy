@@ -1,5 +1,6 @@
 package hellojpa;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -205,7 +206,7 @@ public class JpaMain {
 				System.out.println("m = " + m.getUsername());
 			}*/
 
-			Member member = new Member();
+			/*Member member = new Member();
 			member.setUsername("member1");
 
 			em.persist(member);
@@ -213,7 +214,13 @@ public class JpaMain {
 			Team team = new Team();
 			team.setName("teamA");
 			team.getMembers().add(member);
-			em.persist(team);
+			em.persist(team);*/
+
+			Member member = new Member();
+			member.setUsername("User1");
+			member.setCreatedBy("KIM");
+			member.setCreatedDate(LocalDateTime.now());
+			em.persist(member);
 
 			tx.commit();
 		} catch (Exception e) {
