@@ -1,14 +1,11 @@
 package hellojpa;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,11 +28,9 @@ public class Member extends BaseEntity {
 	@Column(name = "USERNAME")
 	private String username;
 
-	@OneToOne(mappedBy = "member")
-	private Locker locker;
-
-	@OneToMany(mappedBy = "member")
-	private List<Order> orders = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+	private Team team;
 
 	public Member(String username) {
 		this.username = username;

@@ -8,6 +8,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.hibernate.Hibernate;
+
 public class JpaMain {
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
@@ -216,14 +218,95 @@ public class JpaMain {
 			team.getMembers().add(member);
 			em.persist(team);*/
 
-			Member member = new Member();
+			/*Member member = new Member();
 			member.setUsername("User1");
 			member.setCreatedBy("KIM");
 			member.setCreatedDate(LocalDateTime.now());
+			em.persist(member);*/
+
+			// 프록시
+			/*Member member = new Member();
+			member.setUsername("hello");
+
 			em.persist(member);
+
+			em.flush();
+			em.clear();
+
+			// Member findMember = em.find(Member.class, member.getId());
+			Member findMember = em.getReference(Member.class, member.getId());
+			*//*System.out.println("findMember = " + findMember.getClass());
+			System.out.println("findMember.id = " + findMember.getId());
+			System.out.println("findMember.userName = " + findMember.getUsername());
+			System.out.println("findMember.userName = " + findMember.getUsername());*//* // 두 번째 호출시 select 쿼리가 나가지 않고 조회 가능
+
+			System.out.println("before findMember = " + findMember.getClass());
+			System.out.println("findMember.username = " + findMember.getUsername());
+			System.out.println("after findMember = " + findMember.getClass()); // 변하지 않는다.*/
+
+			/*Member member1 = new Member();
+			member1.setUsername("member1");
+			em.persist(member1);
+
+			Member member2 = new Member();
+			member2.setUsername("member2");
+			em.persist(member2);
+
+			em.flush();
+			em.clear();
+
+			Member m1 = em.find(Member.class, member1.getId());
+			*//*Member m2 = em.find(Member.class, member2.getId());
+			System.out.println("m1 == m2 :" + (m1.getClass() == m2.getClass())); *//*// true
+			Member m2 = em.getReference(Member.class, member2.getId());
+			System.out.println("m1 == m2 :" + (m1.getClass() == m2.getClass())); // false
+			// 타입 비교는 == 이 아닌 instanceof 를 사용*/
+
+			Member member = new Member();
+			member.setUsername("member");
+			em.persist(member);
+
+			em.flush();
+			em.clear();
+
+			/*Member m1 = em.find(Member.class, member.getId());
+			System.out.println("m1 = " + m1.getClass()); //m1 = class hellojpa.Member
+
+			Member reference = em.getReference(Member.class, member.getId());
+			System.out.println("reference.getClass() = " + reference.getClass()); // reference.getClass() = class hellojpa.Member
+			// reference도 엔티티 반환
+			System.out.println("m1 == reference : " + (m1 == reference)); // true*/
+
+			/*Member m1 = em.getReference(Member.class, member.getId());
+			System.out.println("m1.getClass() = " + m1.getClass());
+			Member m2 = em.getReference(Member.class, member.getId());
+			System.out.println("m2.getClass() = " + m2.getClass());
+
+			System.out.println("(m1 == m2) = " + (m1 == m2)); // true*/
+
+
+			/*Member refMember = em.getReference(Member.class, member.getId());
+			System.out.println("refMember.getClass() = " + refMember.getClass());
+
+			Member findMember = em.find(Member.class, member.getId()); // 프록시로 반환됨.. 위에서 프록시로 반환을 했기 때문에
+			System.out.println("findMember.getClass() = " + findMember.getClass());
+
+			System.out.println("(refMember == findMember) = " + (refMember == findMember));*/ // true
+
+			Member refMember = em.getReference(Member.class, member.getId());
+			System.out.println("refMember.getClass() = " + refMember.getClass());
+			System.out.println("isLoaded=" + emf.getPersistenceUnitUtil().isLoaded(refMember)); // false
+			// refMember.getUsername(); // 강제 초기화 무식한 방법.
+			Hibernate.initialize(refMember); // 강제 초기화
+			System.out.println("isLoaded=" + emf.getPersistenceUnitUtil().isLoaded(refMember)); // true
+
+			// em.detach(refMember);
+			em.clear();
+			System.out.println("refMember.getUsername() = " + refMember.getUsername()); // could not initialize proxy
 
 			tx.commit();
 		} catch (Exception e) {
+			e.printStackTrace();
 			tx.rollback();
 		} finally {
 			em.close();

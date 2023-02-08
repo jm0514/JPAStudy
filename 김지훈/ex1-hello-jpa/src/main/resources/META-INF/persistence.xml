@@ -4,10 +4,10 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="hello">
 <!--        <class>hellojpa.Locker</class>-->
-<!--        <class>hellojpa.Member</class>-->
+        <class>hellojpa.Member</class>
 <!--        <class>hellojpa.Order</class>-->
 <!--        <class>hellojpa.Product</class>-->
-<!--        <class>hellojpa.Team</class>-->
+        <class>hellojpa.Team</class>
 <!--        <class>hellojpa.advancedmapping.Album</class>-->
 <!--        <class>hellojpa.advancedmapping.Book</class>-->
 <!--        <class>hellojpa.advancedmapping.Item</class>-->
@@ -15,8 +15,8 @@
 
 <!--        <class>hellojpa.advancedmapping.복합키와식별관계매핑.idclass.Parent</class>-->
 <!--        <class>hellojpa.advancedmapping.복합키와식별관계매핑.비식별관계.embeddedid.Parent</class>-->
-        <class>hellojpa.advancedmapping.복합키와식별관계매핑.onetoone식별관계.Board</class>
-        <class>hellojpa.advancedmapping.복합키와식별관계매핑.onetoone식별관계.BoardDetail</class>
+<!--        <class>hellojpa.advancedmapping.복합키와식별관계매핑.onetoone식별관계.Board</class>-->
+<!--        <class>hellojpa.advancedmapping.복합키와식별관계매핑.onetoone식별관계.BoardDetail</class>-->
 
         <properties>
             <!-- 필수 속성 -->
