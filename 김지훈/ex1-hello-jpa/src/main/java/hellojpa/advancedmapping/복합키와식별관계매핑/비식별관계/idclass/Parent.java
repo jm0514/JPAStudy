@@ -1,4 +1,4 @@
-package hellojpa.advancedmapping.복합키와식별관계매핑.idclass;
+package hellojpa.advancedmapping.복합키와식별관계매핑.비식별관계.idclass;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

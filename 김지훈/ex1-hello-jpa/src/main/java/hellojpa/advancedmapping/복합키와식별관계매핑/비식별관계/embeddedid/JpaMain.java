@@ -1,4 +1,4 @@
-package hellojpa.advancedmapping.복합키와식별관계매핑.embeddedid;
+package hellojpa.advancedmapping.복합키와식별관계매핑.비식별관계.embeddedid;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

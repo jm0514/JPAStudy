@@ -14,8 +14,8 @@
 <!--        <class>hellojpa.advancedmapping.Movie</class>-->
 
 <!--        <class>hellojpa.advancedmapping.복합키와식별관계매핑.idclass.Parent</class>-->
-        <class>hellojpa.advancedmapping.복합키와식별관계매핑.embeddedid.Parent</class>
-        <class>hellojpa.advancedmapping.복합키와식별관계매핑.embeddedid.ParentId</class>
+        <class>hellojpa.advancedmapping.복합키와식별관계매핑.비식별관계.embeddedid.Parent</class>
+        <class>hellojpa.advancedmapping.복합키와식별관계매핑.비식별관계.embeddedid.ParentId</class>
 
         <properties>
             <!-- 필수 속성 -->
