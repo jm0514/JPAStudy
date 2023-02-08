@@ -1,4 +1,4 @@
-package hellojpa.advancedmapping.복합키와식별관계매핑;
+package hellojpa.advancedmapping.복합키와식별관계매핑.idclass;
 
 import java.io.Serializable;
 
