@@ -5,8 +5,8 @@
     <persistence-unit name="hello">
 <!--        <class>hellojpa.Locker</class>-->
         <class>hellojpa.Member</class>
-<!--        <class>hellojpa.Order</class>-->
-<!--        <class>hellojpa.Product</class>-->
+        <class>hellojpa.Order</class>
+        <class>hellojpa.Product</class>
         <class>hellojpa.Team</class>
 <!--        <class>hellojpa.advancedmapping.Album</class>-->
 <!--        <class>hellojpa.advancedmapping.Book</class>-->
