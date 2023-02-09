@@ -262,12 +262,12 @@ public class JpaMain {
 			System.out.println("m1 == m2 :" + (m1.getClass() == m2.getClass())); // false
 			// 타입 비교는 == 이 아닌 instanceof 를 사용*/
 
-			Member member = new Member();
+			/*Member member = new Member();
 			member.setUsername("member");
 			em.persist(member);
 
 			em.flush();
-			em.clear();
+			em.clear();*/
 
 			/*Member m1 = em.find(Member.class, member.getId());
 			System.out.println("m1 = " + m1.getClass()); //m1 = class hellojpa.Member
@@ -293,7 +293,7 @@ public class JpaMain {
 
 			System.out.println("(refMember == findMember) = " + (refMember == findMember));*/ // true
 
-			Member refMember = em.getReference(Member.class, member.getId());
+			/*Member refMember = em.getReference(Member.class, member.getId());
 			System.out.println("refMember.getClass() = " + refMember.getClass());
 			System.out.println("isLoaded=" + emf.getPersistenceUnitUtil().isLoaded(refMember)); // false
 			// refMember.getUsername(); // 강제 초기화 무식한 방법.
@@ -302,7 +302,23 @@ public class JpaMain {
 
 			// em.detach(refMember);
 			em.clear();
-			System.out.println("refMember.getUsername() = " + refMember.getUsername()); // could not initialize proxy
+			System.out.
+			println("refMember.getUsername() = " + refMember.getUsername()); // could not initialize proxy*/
+
+			Team team = new Team();
+			team.setName("teamA");
+			em.persist(team);
+
+			Member member = new Member();
+			member.setUsername("member1");
+			member.setTeam(team);
+			em.persist(member);
+
+			em.flush();
+			em.clear();
+
+			Member m = em.find(Member.class, member.getId());
+			System.out.println("m = " + m.getTeam().getClass());
 
 			tx.commit();
 		} catch (Exception e) {
