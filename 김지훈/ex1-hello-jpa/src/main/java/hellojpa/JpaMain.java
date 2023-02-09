@@ -308,17 +308,30 @@ public class JpaMain {
 			Team team = new Team();
 			team.setName("teamA");
 			em.persist(team);
+			Team teamB = new Team();
+			teamB.setName("teamB");
+			em.persist(teamB);
 
 			Member member = new Member();
 			member.setUsername("member1");
 			member.setTeam(team);
 			em.persist(member);
 
+			Member member2 = new Member();
+			member2.setUsername("member2");
+			member2.setTeam(teamB);
+			em.persist(member2);
+
 			em.flush();
 			em.clear();
 
-			Member m = em.find(Member.class, member.getId());
-			System.out.println("m = " + m.getTeam().getClass());
+			// Member m = em.find(Member.class, member.getId());
+			// System.out.println("m = " + m.getTeam().getClass());
+
+			// 즉시 로딩일 때 N + 1 문제 발생.
+			List<Member> members = em.createQuery("select m from Member m", Member.class)
+				.getResultList();
+
 
 			tx.commit();
 		} catch (Exception e) {
