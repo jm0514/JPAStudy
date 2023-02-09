@@ -329,7 +329,7 @@ public class JpaMain {
 			// System.out.println("m = " + m.getTeam().getClass());
 
 			// 즉시 로딩일 때 N + 1 문제 발생.
-			List<Member> members = em.createQuery("select m from Member m", Member.class)
+			List<Member> members = em.createQuery("select m from Member m join fetch m.team", Member.class)
 				.getResultList();
 
 
