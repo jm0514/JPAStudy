@@ -341,9 +341,12 @@ public class JpaMain {
 			parent.addChild(child2);
 
 			// 영속성 전이 사용 전... persist()를 3번 호출해 주어야 한다.
-			em.persist(parent);
+			/*em.persist(parent);
 			em.persist(child1);
-			em.persist(child2);
+			em.persist(child2);*/
+
+			// 영속성 전이 사용 후
+			em.persist(parent);
 
 			tx.commit();
 		} catch (Exception e) {
