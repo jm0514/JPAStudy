@@ -325,12 +325,13 @@ public class JpaMain {
 			em.flush();
 			em.clear();
 
-			// Member m = em.find(Member.class, member.getId());
-			// System.out.println("m = " + m.getTeam().getClass());
+			Member m = em.find(Member.class, member.getId());
+			List<Order> orders = m.getOrders();
+			System.out.println("orders = " + orders.getClass().getName());
 
 			// 즉시 로딩일 때 N + 1 문제 발생.
-			List<Member> members = em.createQuery("select m from Member m join fetch m.team", Member.class)
-				.getResultList();
+			// List<Member> members = em.createQuery("select m from Member m join fetch m.team", Member.class)
+			// 	.getResultList();
 
 
 			tx.commit();
