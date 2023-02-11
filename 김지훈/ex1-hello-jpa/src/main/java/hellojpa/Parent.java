@@ -1,9 +1,9 @@
-package jpabook.jpashop.domain;
+package hellojpa;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,17 +15,19 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Member extends BaseEntity {
+public class Parent {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "MEMBER_ID")
 	private Long id;
-	private String name;
-	private String city;
-	private String street;
-	private String zipcode;
 
-	@OneToMany(mappedBy = "member")
-	private List<Order> orders = new ArrayList<>();
+	private String name;
+
+	@OneToMany(mappedBy = "parent", orphanRemoval = true)
+	private List<Child> childList = new ArrayList<>();
+
+	public void addChild(Child child) {
+		childList.add(child);
+		child.setParent(this);
+	}
 }

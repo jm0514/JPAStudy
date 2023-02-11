@@ -1,14 +1,13 @@
 package hellojpa;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
@@ -23,24 +22,19 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member extends BaseEntity {
+public class Team extends BaseEntity {
 	@Id
 	@GeneratedValue
-	@Column(name = "MEMBER_ID")
+	@Column(name = "TEAM_ID")
 	private Long id;
 
-	@Column(name = "USERNAME")
-	private String username;
+	private String name;
 
-	// @ManyToOne(fetch = FetchType.LAZY)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@OneToMany
 	@JoinColumn(name = "TEAM_ID")
-	private Team team;
+	private List<Member> members = new ArrayList<>();
 
-	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
-	private List<Order> orders;
-
-	public Member(String username) {
-		this.username = username;
+	public Team(String name) {
+		this.name = name;
 	}
 }
