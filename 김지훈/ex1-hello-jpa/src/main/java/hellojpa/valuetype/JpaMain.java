@@ -1,6 +1,8 @@
 package hellojpa.valuetype;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -49,6 +51,22 @@ public class JpaMain {
 			member.getAddressHistory().add(new Address("old2", "street", "123456"));
 
 			em.persist(member);
+
+			em.flush();
+			em.clear();
+
+			System.out.println("=============== START ===============");
+			Member findMember = em.find(Member.class, member.getId());
+
+			List<Address> addressHistory = findMember.getAddressHistory(); // 지연 로딩
+			for (Address address : addressHistory) {
+				System.out.println("address = " + address);
+			}
+
+			Set<String> favoriteFoods = findMember.getFavoriteFoods();
+			for (String favoriteFood : favoriteFoods) {
+				System.out.println("favoriteFood = " + favoriteFood);
+			}
 
 			tx.commit();
 		} catch (Exception e) {
