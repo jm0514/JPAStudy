@@ -1,7 +1,5 @@
 package hellojpa.valuetype;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -9,11 +7,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Member {
 
 	@Id
@@ -32,14 +32,9 @@ public class Member {
 	@Embedded
 	private Address homeAddress;
 
-	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name = "city",
-			column = @Column(name = "WORK_CITY")),
-		@AttributeOverride(name = "street",
-			column = @Column(name = "WORK_STREET")),
-		@AttributeOverride(name = "zipcode",
-			column = @Column(name = "WORK_ZIPCODE"))
-	})
-	private Address workAddress;
+	public Member(String username, Period workPeriod, Address homeAddress) {
+		this.username = username;
+		this.workPeriod = workPeriod;
+		this.homeAddress = homeAddress;
+	}
 }
