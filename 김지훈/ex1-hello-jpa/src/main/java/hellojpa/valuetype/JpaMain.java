@@ -70,7 +70,7 @@ public class JpaMain {
 
 			// homeCity -> newCity
 			// findMember.getHomeAddress().setCity("newCity"); // X -> side effect 발생 가능성.
-			Address old = findMember.getHomeAddress();
+			/*Address old = findMember.getHomeAddress();
 			findMember.setHomeAddress(new Address("newCity", old.getStreet(), old.getZipcode()));
 
 			// 치킨 -> 한식
@@ -83,8 +83,17 @@ public class JpaMain {
 
 			// 일대다 관계를 위한 엔티티를 만들고 값 타입 사용
 			findMember.getAddressHistory().remove(new AddressEntity("old1", "street", "123456"));
-			findMember.getAddressHistory().add(new AddressEntity("newCity1", "street", "123456"));
+			findMember.getAddressHistory().add(new AddressEntity("newCity1", "street", "123456"));*/
 
+			// jpql
+			List<Member> resultList = em.createQuery(
+				"select m from Member m where m.username like '%mem%'",
+				Member.class
+			).getResultList();
+
+			for (Member result : resultList) {
+				System.out.println("member = " + result.getUsername());
+			}
 
 			tx.commit();
 		} catch (Exception e) {
