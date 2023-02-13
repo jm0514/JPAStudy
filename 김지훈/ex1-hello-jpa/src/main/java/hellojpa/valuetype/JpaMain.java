@@ -58,7 +58,7 @@ public class JpaMain {
 			System.out.println("=============== START ===============");
 			Member findMember = em.find(Member.class, member.getId());
 
-			List<Address> addressHistory = findMember.getAddressHistory(); // 지연 로딩
+			/*List<Address> addressHistory = findMember.getAddressHistory(); // 지연 로딩
 			for (Address address : addressHistory) {
 				System.out.println("address = " + address);
 			}
@@ -66,7 +66,20 @@ public class JpaMain {
 			Set<String> favoriteFoods = findMember.getFavoriteFoods();
 			for (String favoriteFood : favoriteFoods) {
 				System.out.println("favoriteFood = " + favoriteFood);
-			}
+			}*/
+
+			// homeCity -> newCity
+			// findMember.getHomeAddress().setCity("newCity"); // X -> side effect 발생 가능성.
+			Address old = findMember.getHomeAddress();
+			findMember.setHomeAddress(new Address("newCity", old.getStreet(), old.getZipcode()));
+
+			// 치킨 -> 한식
+			findMember.getFavoriteFoods().remove("치킨");
+			findMember.getFavoriteFoods().add("한식");
+
+			// 이 경우 addressHistory 를 모두 delete 한 후 다시 데이터를 insert 함.
+			findMember.getAddressHistory().remove(new Address("old1", "street", "123456"));
+			findMember.getAddressHistory().add(new Address("newCity1", "street", "123456"));
 
 			tx.commit();
 		} catch (Exception e) {
