@@ -47,8 +47,8 @@ public class JpaMain {
 			member.getFavoriteFoods().add("피자");
 			member.getFavoriteFoods().add("족발");
 
-			member.getAddressHistory().add(new Address("old1", "street", "123456"));
-			member.getAddressHistory().add(new Address("old2", "street", "123456"));
+			member.getAddressHistory().add(new AddressEntity("old1", "street", "123456"));
+			member.getAddressHistory().add(new AddressEntity("old2", "street", "123456"));
 
 			em.persist(member);
 
@@ -78,8 +78,13 @@ public class JpaMain {
 			findMember.getFavoriteFoods().add("한식");
 
 			// 이 경우 addressHistory 를 모두 delete 한 후 다시 데이터를 insert 함.
-			findMember.getAddressHistory().remove(new Address("old1", "street", "123456"));
-			findMember.getAddressHistory().add(new Address("newCity1", "street", "123456"));
+			// findMember.getAddressHistory().remove(new Address("old1", "street", "123456"));
+			// findMember.getAddressHistory().add(new Address("newCity1", "street", "123456"));
+
+			// 일대다 관계를 위한 엔티티를 만들고 값 타입 사용
+			findMember.getAddressHistory().remove(new AddressEntity("old1", "street", "123456"));
+			findMember.getAddressHistory().add(new AddressEntity("newCity1", "street", "123456"));
+
 
 			tx.commit();
 		} catch (Exception e) {

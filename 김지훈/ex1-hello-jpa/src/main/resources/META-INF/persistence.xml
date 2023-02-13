@@ -20,7 +20,8 @@
 <!--        <class>hellojpa.advancedmapping.복합키와식별관계매핑.onetoone식별관계.Board</class>-->
 <!--        <class>hellojpa.advancedmapping.복합키와식별관계매핑.onetoone식별관계.BoardDetail</class>-->
 
-            <class>hellojpa.valuetype.Member</class>
+        <class>hellojpa.valuetype.Member</class>
+        <class>hellojpa.valuetype.AddressEntity</class>
 
         <properties>
             <!-- 필수 속성 -->
