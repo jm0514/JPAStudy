@@ -1,13 +1,17 @@
 package hellojpa.valuetype;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 public class Member {
 
 	@Id
@@ -19,11 +23,10 @@ public class Member {
 	private String username;
 
 	// 기간 Period
-	private LocalDateTime startDate;
-	private LocalDateTime endDate;
+	@Embedded
+	private Period workPeriod;
 
 	// 주소 Address
-	private String city;
-	private String street;
-	private String zipcode;
+	@Embedded
+	private Address homeAddress;
 }

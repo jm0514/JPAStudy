@@ -1,5 +1,7 @@
 package hellojpa.valuetype;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -13,6 +15,12 @@ public class JpaMain {
 		tx.begin();
 
 		try {
+
+			Member member = new Member();
+			member.setUsername("hello");
+			member.setHomeAddress(new Address("city", "street", "123456"));
+			member.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now()));
+			em.persist(member);
 
 			tx.commit();
 		} catch (Exception e) {
