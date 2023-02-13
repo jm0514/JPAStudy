@@ -1,10 +1,18 @@
 package hellojpa.valuetype;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,17 +32,20 @@ public class Member {
 	@Column(name = "USERNAME")
 	private String username;
 
-	// 기간 Period
-	@Embedded
-	private Period workPeriod;
-
-	// 주소 Address
 	@Embedded
 	private Address homeAddress;
 
-	public Member(String username, Period workPeriod, Address homeAddress) {
-		this.username = username;
-		this.workPeriod = workPeriod;
-		this.homeAddress = homeAddress;
-	}
+	@ElementCollection
+	@CollectionTable(name = "FAVORITE_FOOD", joinColumns =
+		@JoinColumn(name = "MEMBER_ID")
+	)
+	@Column(name = "FOOD_NAME")
+	private Set<String> favoriteFoods = new HashSet<>();
+
+	@ElementCollection
+	@CollectionTable(name = "ADDRESS", joinColumns =
+		@JoinColumn(name = "MEMBER_ID")
+	)
+	private List<Address> addressHistory = new ArrayList<>();
+
 }
