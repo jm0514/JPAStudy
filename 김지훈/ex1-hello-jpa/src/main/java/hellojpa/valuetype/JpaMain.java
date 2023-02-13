@@ -28,7 +28,10 @@ public class JpaMain {
 			Member member1 = new Member("member1", new Period(LocalDateTime.now(), LocalDateTime.now()), address);
 			em.persist(member1);
 
-			Member member2 = new Member("member2", new Period(LocalDateTime.now(), LocalDateTime.now()), address);
+			// side effect 해결
+			// 값 타입 복사
+			Address address2 = new Address(address.getCity(), address.getStreet(), address.getZipcode());
+			Member member2 = new Member("member2", new Period(LocalDateTime.now(), LocalDateTime.now()), address2);
 			em.persist(member2);
 
 			member1.getHomeAddress().setCity("newCity");
