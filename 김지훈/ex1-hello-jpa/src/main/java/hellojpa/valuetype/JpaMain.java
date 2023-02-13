@@ -98,7 +98,7 @@ public class JpaMain {
 				System.out.println("member = " + result.getUsername());
 			}*/
 
-			CriteriaBuilder cb = em.getCriteriaBuilder();
+			/*CriteriaBuilder cb = em.getCriteriaBuilder();
 			CriteriaQuery<Member> query = cb.createQuery(Member.class);
 
 			Root<Member> m = query.from(Member.class);
@@ -109,7 +109,16 @@ public class JpaMain {
 
 			for (Member member1 : resultList) {
 				System.out.println("member = " + member1.getUsername());
+			}*/
+
+			List<Member> resultList = em.createNativeQuery("select MEMBER_ID, city, street, zipcode, USERNAME from MEMBER",
+					Member.class)
+				.getResultList();
+
+			for (Member member1 : resultList) {
+				System.out.println("member = " + member1);
 			}
+
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
