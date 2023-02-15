@@ -92,6 +92,7 @@ public class JpaMain {
 			Member member = new Member();
 			member.setUsername("member1");
 			member.setAge(10);
+			member.setType(MemberType.ADMIN);
 			member.changeTeam(team);
 
 			em.persist(member);
@@ -104,9 +105,22 @@ public class JpaMain {
 			// String query = "select m from Member m left join m.team t"; // left 조인
 			// String query = "select m from Member m, Team t where m.username = t.name"; // 세타조인
 			// String query = "select m from Member m left join m.team t on t.name = 'teamA'"; // 조인 대상 필터링
-			String query = "select m from Member m left join Team t on m.username = t.name"; // 연관관계 없는 엔티티 외부 조인
+			/*String query = "select m from Member m left join Team t on m.username = t.name"; // 연관관계 없는 엔티티 외부 조인
 			List<Member> result = em.createQuery(query, Member.class)
-				.getResultList();
+				.getResultList();*/
+
+			// JPQL 타입 표현과 기타식
+			String query = "select m.username, 'HELLO', TRUE from Member m"
+				+ "    where m.type = :userType";
+			List<Object[]> result = em.createQuery(query)
+							.setParameter("userType", MemberType.ADMIN)
+							.getResultList();
+			for (Object[] objects : result) {
+				System.out.println("objects[0] = " + objects[0]);
+				System.out.println("objects[1] = " + objects[1]);
+				System.out.println("objects[2] = " + objects[2]);
+			}
+
 			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
