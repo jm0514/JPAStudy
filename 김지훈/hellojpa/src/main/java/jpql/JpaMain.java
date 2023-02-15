@@ -1,5 +1,6 @@
 package jpql;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -99,6 +100,7 @@ public class JpaMain {
 
 			Member member2 = new Member();
 			member2.setUsername("관리자2");
+			member2.changeTeam(team);
 			em.persist(member2);
 
 			em.flush();
@@ -149,14 +151,14 @@ public class JpaMain {
 			// String query = "select substring(m.username, 2, 3) from Member m";
 
 			// String query = "select function('group_concat', m.username) from Member m";
-			String query = "select group_concat(m.username) from Member m";
+			/*String query = "select group_concat(m.username) from Member m";
 
 			List<String> result = em.createQuery(query, String.class)
 				.getResultList();
 
 			for (String s : result) {
 				System.out.println("s = " + s);
-			}
+			}*/
 			// locate
 			// String query = "select locate('de', 'abcdef') from Member m";
 			// SIZE
@@ -168,6 +170,15 @@ public class JpaMain {
 			for (Integer s : result) {
 				System.out.println("s = " + s);
 			}*/
+
+			// 컬렉션 값 연관 경로
+			/*String query = "select t.members.size from Team t";
+			Integer result = em.createQuery(query, Integer.class)
+				.getSingleResult();*/
+			String query = "select t.members from Team t";
+			List<Collection> result = em.createQuery(query, Collection.class)
+				.getResultList();
+			System.out.println("result = " + result);
 
 			tx.commit();
 		} catch (Exception e) {
