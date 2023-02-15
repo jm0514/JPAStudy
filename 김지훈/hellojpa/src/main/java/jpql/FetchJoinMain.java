@@ -59,7 +59,7 @@ public class FetchJoinMain {
 
 			// 컬렉션 페치 조인
 			// String query = "select t from Team t join fetch t.members";
-			String query = "select DISTINCT t from Team t join fetch t.members";
+			/*String query = "select DISTINCT t from Team t join fetch t.members";
 			List<Team> result = em.createQuery(query, Team.class)
 				.getResultList();
 
@@ -68,6 +68,29 @@ public class FetchJoinMain {
 				for (Member member : team.getMembers()) {
 					System.out.println("-----> member = " + member);
 				}
+			}*/
+
+			// 엔티티 직접 사용 - 기본 키 값
+			/*String query = "select m from Member m where m = :member";
+			Member findMember = em.createQuery(query, Member.class)
+				.setParameter("member", member1)
+				.getSingleResult();*/
+
+			/*String query = "select m from Member m where m.id = :memberId";
+			Member findMember = em.createQuery(query, Member.class)
+				.setParameter("memberId", member1.getId())
+				.getSingleResult();
+			System.out.println("findMember = " + findMember);*/
+
+			// 엔티티 직접 사용 - 외래 키 값
+			String query = "select m from Member m where m.team = :team";
+
+			List<Member> members = em.createQuery(query, Member.class)
+				.setParameter("team", member1.getTeam())
+				.getResultList();
+
+			for (Member member : members) {
+				System.out.println("member = " + member);
 			}
 
 			tx.commit();
