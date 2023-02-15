@@ -43,7 +43,7 @@ public class FetchJoinMain {
 
 			// 엔티티 페치 조인
 			// String query = "select m from Member m";
-			String query = "select m from Member m join fetch m.team";
+			/*String query = "select m from Member m join fetch m.team";
 			List<Member> result = em.createQuery(query, Member.class)
 				.getResultList();
 			for (Member member : result) {
@@ -55,6 +55,19 @@ public class FetchJoinMain {
 				// 회원3, 팀B (SQL)
 				// team에 접근할 떄 지연 로딩으로 team을 가져옴.
 				// 회원 100명 -> N + 1 문제. -> 페치 조인으로 해결
+			}*/
+
+			// 컬렉션 페치 조인
+			// String query = "select t from Team t join fetch t.members";
+			String query = "select DISTINCT t from Team t join fetch t.members";
+			List<Team> result = em.createQuery(query, Team.class)
+				.getResultList();
+
+			for (Team team : result) {
+				System.out.println("team = " + team.getName() + " | members = " + team.getMembers().size());
+				for (Member member : team.getMembers()) {
+					System.out.println("-----> member = " + member);
+				}
 			}
 
 			tx.commit();
