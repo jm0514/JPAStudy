@@ -91,12 +91,15 @@ public class JpaMain {
 
 			Member member = new Member();
 			// member.setUsername(null);
-			member.setUsername("관리자");
+			member.setUsername("관리자1");
 			member.setAge(10);
 			member.setType(MemberType.ADMIN);
 			member.changeTeam(team);
-
 			em.persist(member);
+
+			Member member2 = new Member();
+			member2.setUsername("관리자2");
+			em.persist(member2);
 
 			em.flush();
 			em.clear();
@@ -133,8 +136,20 @@ public class JpaMain {
 			// COALESCE
 			/*String query =
 						"select coalesce(m.username, '이름 없는 회원') as username from Member m";*/
-			String query =
-						"select nullif(m.username, '관리자') from Member m";
+			// NULLIF
+			/*String query =
+						"select nullif(m.username, '관리자') from Member m";*/
+
+			// JPQL 함수
+			// concat
+			// String query = "select 'a' || 'b' from Member m";
+			// String query = "select concat('a', 'b') from Member m";
+
+			// SUBSTRING
+			// String query = "select substring(m.username, 2, 3) from Member m";
+
+			// String query = "select function('group_concat', m.username) from Member m";
+			String query = "select group_concat(m.username) from Member m";
 
 			List<String> result = em.createQuery(query, String.class)
 				.getResultList();
@@ -142,8 +157,17 @@ public class JpaMain {
 			for (String s : result) {
 				System.out.println("s = " + s);
 			}
+			// locate
+			// String query = "select locate('de', 'abcdef') from Member m";
+			// SIZE
+			// String query = "select size(t.members) from Team t";
 
+			/*List<Integer> result = em.createQuery(query, Integer.class)
+				.getResultList();
 
+			for (Integer s : result) {
+				System.out.println("s = " + s);
+			}*/
 
 			tx.commit();
 		} catch (Exception e) {
