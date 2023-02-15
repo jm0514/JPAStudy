@@ -83,10 +83,15 @@ public class FetchJoinMain {
 			System.out.println("findMember = " + findMember);*/
 
 			// 엔티티 직접 사용 - 외래 키 값
-			String query = "select m from Member m where m.team = :team";
+			/*String query = "select m from Member m where m.team = :team";
 
 			List<Member> members = em.createQuery(query, Member.class)
 				.setParameter("team", member1.getTeam())
+				.getResultList();*/
+
+			// Named 쿼리
+			List<Member> members = em.createNamedQuery("Member.findByUsername", Member.class)
+				.setParameter("username", "회원1")
 				.getResultList();
 
 			for (Member member : members) {
