@@ -154,8 +154,11 @@ String query = "select distinct t From Team t join fetch t.members" ;
                         .getResultList();
         
         for(Team team : result){
-            System.out.println("team = "+ team.getName() + "|members="+team.getMembers().size());
-        
+        System.out.println("team = "+team.getName()+"|members="+team.getMembers().size());
+            for(Member member : team.getMembers()){
+                System.out.println("->member="+member);
+        }
+        }
 ```
 * DISTINCT가 주가로 애플리케이션에서 중복 제거 시도
 * 같은 식별자를 가진 Team엔티티를 제거함
@@ -171,4 +174,4 @@ String query = "select distinct t From Team t join fetch t.members" ;
 * 단지 SELECT 절에 지정한 엔티티만 조회 할 뿐
 * 여기서는 팀 엔티티만 조회하고, 회원 엔티티는 조회 x
 * 페치 조인을 사용 할 때만 연관된 엔티티도 함께 조회(즉시로딩)
-* 페치 조인은 객체 그래프를 SQL한번에 조회하는 개념
+* 페치 조인은 객체 그래프를 SQL한번에 조회하는 개 
