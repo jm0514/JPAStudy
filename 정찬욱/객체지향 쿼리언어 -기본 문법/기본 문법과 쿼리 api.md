@@ -107,17 +107,7 @@ public class Product{
 <img src="./img/query.png">
 
 ```java
-public class Main{
-    public static void main(String[] args) {
-        Member member = new Member();
-        member.setUsername("member1");
-        member.setAge(10);
-        em.persist(member);
-        
-        TypedQuery<Member> query1 = em.createQuery("select m from Member m", Member.class);
-        Query query2 = em.createQuery("select m.username, m.age form Member m"); // username은 String, age는 int값이라 반환값이 명확하지 않음
-    }
-}
+산
 
 ```
 
