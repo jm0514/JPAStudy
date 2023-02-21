@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import jpabook.jpashop.controller.BookForm;
+import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,18 @@ public class ItemService {
 	@Transactional
 	public void saveItem(Item item) {
 		itemRepository.save(item);
+	}
+
+	// 변경 감지 기능 사용
+	@Transactional
+	public void updateItem(Long itemId, BookForm form) {
+		Book findItem = (Book) itemRepository.findOne(itemId);
+		findItem.setId(form.getId());
+		findItem.setName(form.getName());
+		findItem.setPrice(form.getPrice());
+		findItem.setStockQuantity(form.getStockQuantity());
+		findItem.setAuthor(form.getAuthor());
+		findItem.setIsbn(form.getIsbn());
 	}
 
 	public List<Item> findItems() {
