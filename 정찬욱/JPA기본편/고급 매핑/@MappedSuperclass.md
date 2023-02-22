@@ -1,6 +1,6 @@
 # @MappedSuperclass
 
-<img src="./img/mapped.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/고급 매핑/img/mapped.png">
 
 * 공통 매핑 정보가 필요할 때 사용(id, name)
 * 진짜 단순하게 객체 입장에서 속성만 상속받아서 사용하고 싶을때 사용

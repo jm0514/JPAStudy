@@ -25,7 +25,7 @@
 * 연결 테이블용 엔티티 추가
 * @ManyTOMany -> @OneToMany @ManyToOn과 로 풀어서 해결
 
-<img src="./img/m:n.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/다양한 연관관계 매핑/img/m:n.png">
 
 ```java
     public Member{

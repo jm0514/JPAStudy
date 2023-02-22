@@ -23,4 +23,4 @@ from Team t
 * 정확히 지정한 값
 
 ## 8.3 COALESCE, NULIF
-<img src="./img/case.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/case.png">

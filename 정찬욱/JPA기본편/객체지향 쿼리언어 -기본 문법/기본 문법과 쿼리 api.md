@@ -6,7 +6,7 @@
 
 ## 2.1 엔티티 설계
 
-<img src="./img/model.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/model.png">
 
 ```java
 @Entity
@@ -87,7 +87,7 @@ public class Product{
 
 ## 2.2 JQPL 문법
 
-<img src="./img/grammer.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/grammer.png">
 
 * 그냥 SQL문이랑 똑같음
 * select m from Member as m where m.age > 18;
@@ -98,13 +98,13 @@ public class Product{
 
 ## 2.3 집합과 정렬
 
-<img src="./img/order.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/order.png">
 
 ## 2.4 Query
 * TypeQuery : 반환 티입이 명확할 때 사용
 * Query : 반환 타입이 명확하지 않을 때 사용
 
-<img src="./img/query.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/query.png">
 
 ```java
 산

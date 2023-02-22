@@ -1,6 +1,6 @@
 # 7 JPQL 타입 표현
 
-<img src="./img/type.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/type.png">
 
 ```java
 public class Main{
@@ -21,6 +21,6 @@ public class Main{
 
 ```
 
-<img src="./img/same.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/same.png">
 
 

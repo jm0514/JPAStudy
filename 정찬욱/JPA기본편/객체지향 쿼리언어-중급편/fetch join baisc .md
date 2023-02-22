@@ -24,7 +24,7 @@ INNER JOIN TEAM T ON M.TEAM_ID=>ID
 * 어디서 본거같은데? -> 즉시로딩이랑 상황이 같음. 근데 내가 가져올 정보를 직접 명시하는 방법
 
 ## 2.3 예제
-<img src="./img/fetch.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어-중급편/img/fetch.png">
 
 ```java
 public class Main{
@@ -128,7 +128,7 @@ team = 팀B|members=1
 * DB입장에선 1:N조인하면 데이터가 뻥튀기됨
 * 팀 입장에선 팀A는 하난데, 맴버가 두명이라서 join결과는 행이 두개가 되는거임
 
-<img src="./img/collecJ.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어-중급편/img/collecJ.png">
 
 * 조회한 컬렉션에는 같은 주소값을 가지는 결과가 두개 담기게 되는것
 
@@ -163,7 +163,7 @@ String query = "select distinct t From Team t join fetch t.members" ;
 * DISTINCT가 주가로 애플리케이션에서 중복 제거 시도
 * 같은 식별자를 가진 Team엔티티를 제거함
 
-<img src="./img/distEn.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어-중급편/img/distEn.png">
 
 
 * 참고로 1:N관계는 뻥튀기가 발생하는데 N:1은 뻥튀기 발생 안됨

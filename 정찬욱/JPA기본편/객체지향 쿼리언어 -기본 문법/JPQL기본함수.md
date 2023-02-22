@@ -1,7 +1,7 @@
 # 9 JPQL 기본 함수
 
 ## 9.1 JPQL에서 제공하는 기본함수
-<img src="./img/basicF.png">
+<img src="Desktop/JPAStudy/정찬욱/JPA기본편/객체지향 쿼리언어 -기본 문법/img/basicF.png">
 
 * 얘들은 DB 방언에 좌우되지 않음. 편하게 DB종류 가리지 않고 그냥 쓰면됨
 
