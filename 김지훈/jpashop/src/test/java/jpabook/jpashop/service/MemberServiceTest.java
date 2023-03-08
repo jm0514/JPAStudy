@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import jakarta.persistence.EntityManager;
 import jpabook.jpashop.domain.Member;
-import jpabook.jpashop.repository.MemberRepository;
+import jpabook.jpashop.repository.MemberOldRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -22,7 +22,7 @@ public class MemberServiceTest {
 	@Autowired
 	MemberService memberService;
 	@Autowired
-	MemberRepository memberRepository;
+	MemberOldRepository memberRepository;
 
 	@Autowired
 	EntityManager em;
