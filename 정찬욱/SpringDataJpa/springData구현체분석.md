@@ -19,3 +19,36 @@
   * 새로운 엔티티면 저장(persist)
   * 새로운 엔티티가 아니면 병합(merge) -> 영속성을 잃은 객체가 다시 영속성 컨택스트의 관리를 받아야 할 때 사용함
     * 업데이트의 목적이 아님.
+
+
+
+## 새로운 엔티티를 판단하는 방법
+* 객체는 flush 하기 전까지는 사실 null값임 -> null이면 새로운 값이라고 생각함.
+* 근데 만약에 @GeneratedValue를 안쓰면 -> pk에 값이 이미 있기때문에 persist가 안먹힘. -> merge로 가버림
+  * merge는 db에 값이 있을거라 가정하고 사용함. db에서 그래서 값을 가져옴. 없으면 새거라고 인식하고 그제서야 넣음.
+  * merge는 쓸 일이 별로 없음. 그냥 쓸 일이 없다고 가정해야 함.
+  
+*persistable구현
+```java
+@Entity
+@EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class Item implements Persistable<String> {
+  @Id
+  private String id;
+  @CreatedDate
+  private LocalDateTime createdDate;
+  public Item(String id) {
+    this.id = id;
+  }
+  @Override
+  public String getId() {
+    return id;
+  }
+  @Override
+  public boolean isNew() {
+    return createdDate == null;
+  }
+}
+
+```
