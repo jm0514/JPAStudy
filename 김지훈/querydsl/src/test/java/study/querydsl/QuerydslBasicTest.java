@@ -1,5 +1,7 @@
 package study.querydsl;
 
+import static study.querydsl.entitiy.QMember.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +13,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import jakarta.persistence.EntityManager;
 import study.querydsl.entitiy.Member;
-import study.querydsl.entitiy.QMember;
 import study.querydsl.entitiy.Team;
 
 @SpringBootTest
@@ -59,12 +60,10 @@ public class QuerydslBasicTest {
 
 	@Test
 	void startQuerydsl() {
-		QMember m = new QMember("m");
-
 		Member findMember = queryFactory
-			.select(m)
-			.from(m)
-			.where(m.username.eq("member1")) // 파라미터 바인딩 처리
+			.select(member)
+			.from(member)
+			.where(member.username.eq("member1")) // 파라미터 바인딩 처리
 			.fetchOne();
 
 		Assertions.assertThat(findMember.getUsername()).isEqualTo("member1");
