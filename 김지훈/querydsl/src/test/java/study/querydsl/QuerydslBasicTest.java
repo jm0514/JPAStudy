@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.querydsl.core.BooleanBuilder;
@@ -685,5 +686,52 @@ public class QuerydslBasicTest {
 
 	private Predicate allEq(String usernameCond, Integer ageCond) {
 		return usernameEq(usernameCond).and(ageEq(ageCond));
+	}
+
+	@Test
+	void bulkUpdate() {
+		// member1 = 10 -> DB member1
+		// member2 = 20 -> DB member2
+		// member3 = 30 -> DB member3
+		// member4 = 40 -> DB member4
+		long count = queryFactory
+			.update(member)
+			.set(member.username, "비회원")
+			.where(member.age.lt(28))
+			.execute();
+
+		// member1 = 10 -> DB 비회원     영속성 컨텍스트 member1
+		// member2 = 20 -> DB 비회원     영속성 컨텍스트 member2
+		// member3 = 30 -> DB member3  영속성 컨텍스트 member3
+		// member4 = 40 -> DB member4  영속성 컨텍스트 member4
+
+		em.flush();
+		em.clear();
+
+		List<Member> result = queryFactory
+			.selectFrom(member)
+			.fetch();
+		for (Member m : result) {
+			// 영속성 컨텍스트가 우선권을 가짐.
+			// -> em.flush(), em.clear() 로 영속성 컨텍스트 초기화 진행 후 정합성을 맞춘다.
+			System.out.println("m = " + m);
+		}
+	}
+
+	@Test
+	void bulkAdd() {
+		long count = queryFactory
+			.update(member)
+			// .set(member.age, member.age.add(1))
+			.set(member.age, member.age.multiply(2))
+			.execute();
+	}
+
+	@Test
+	void bulkDelete() {
+		long count = queryFactory
+			.delete(member)
+			.where(member.age.gt(18))
+			.execute();
 	}
 }
